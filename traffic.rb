@@ -38,6 +38,25 @@ class Bulb < Shoes::Shape
   end  
 end
 
+class GoBulb < Bulb
+  def bulb_colour
+    "#00FF30"
+  end
+end 
+
+class WaitBulb < Bulb
+  def bulb_colour
+    "#FFFC00"
+  end
+end 
+
+class StopBulb < Stop
+  def bulb_colour
+    "#FF0000"
+  end
+end
+
+
 Shoes.app :title => "My Amazing Traffic Light", :width => 150, :height => 250 do
   background "000", :curve => 10, :margin => 25  
   stroke black    
@@ -48,6 +67,6 @@ Shoes.app :title => "My Amazing Traffic Light", :width => 150, :height => 250 do
   @bottom = Bulb.new self, 50, 160, true
   
   click do
-    
+    bulb
   end
 end
