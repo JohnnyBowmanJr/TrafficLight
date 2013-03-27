@@ -50,7 +50,7 @@ class WaitBulb < Bulb
   end
 end 
 
-class StopBulb < Stop
+class StopBulb < Bulb
   def bulb_colour
     "#FF0000"
   end
@@ -62,11 +62,18 @@ Shoes.app :title => "My Amazing Traffic Light", :width => 150, :height => 250 do
   stroke black    
   
   @traffic_light = TrafficLight.new
-  @top = Bulb.new self, 50, 40, true     
-  @middle = Bulb.new self, 50, 100, true
-  @bottom = Bulb.new self, 50, 160, true
-  
+  @top = GoBulb.new self, 50, 40, true     
+  @middle = WaitBulb.new self, 50, 100, true
+  @bottom = StopBulb.new self, 50, 160, true
+
+  # module TL
+  #   GO = "#00FF30"
+  #   WAIT = "#FFFC00"
+  #   STOP = "#FF0000"
+  # end 
+
+
   click do
-    bulb
+  
   end
 end
