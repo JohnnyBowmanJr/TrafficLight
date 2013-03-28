@@ -1,4 +1,3 @@
-
 module TL
   Go = "#00FF30"
   Wait = "#FFFC00"
@@ -9,12 +8,12 @@ class TrafficLight
   include Enumerable
   include TL
 
-  def each
-    yield [true, false, false]
-    yield [true, true, false]
-    yield [false, false, true]
-    yield [false, true, false]
-  end
+  # def each
+  #   yield [true, false, false]
+  #   yield [true, true, false]
+  #   yield [false, false, true]
+  #   yield [false, true, false]
+  # end
 
   def each
     yield TL::Go
@@ -22,6 +21,8 @@ class TrafficLight
     yield TL::Stop
     yield TL::Wait
   end
+
+
 end
 
 class Bulb < Shoes::Shape
@@ -52,26 +53,41 @@ class Bulb < Shoes::Shape
   
   def bulb_colour
     "#999999"
-  end
+  end  
 end
+
+
 
 class GoBulb < Bulb
   def bulb_colour
-    TL::Go
+    if self.switched_on == true
+      TL::Go
+    else
+      "#999999"
+    end
   end
 end 
 
 class WaitBulb < Bulb
   def bulb_colour
-    TL::Wait
+    if self.switched_on == true
+      TL::Wait
+    else
+      "#999999"
+    end
   end
 end 
 
 class StopBulb < Bulb
   def bulb_colour
-    TL::Stop 
+    if self.switched_on == false
+      TL::Stop
+    else
+      "#999999"
+    end
   end
 end
+
 
 Shoes.app :title => "My Amazing Traffic Light", :width => 150, :height => 250 do
   background "000", :curve => 10, :margin => 25  
@@ -81,6 +97,8 @@ Shoes.app :title => "My Amazing Traffic Light", :width => 150, :height => 250 do
   @top = StopBulb.new self, 50, 40, false     
   @middle = WaitBulb.new self, 50, 100, false
   @bottom = GoBulb.new self, 50, 160, false
+
+  @top.bulb_colour = "#FF0000"
   
   click do
   
