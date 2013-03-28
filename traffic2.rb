@@ -98,9 +98,14 @@ Shoes.app :title => "My Amazing Traffic Light", :width => 150, :height => 250 do
   @middle = WaitBulb.new self, 50, 100, false
   @bottom = GoBulb.new self, 50, 160, false
 
-  @top.bulb_colour = "#FF0000"
-  
-  click do
-  
-  end
+  @traffic_light.each
+    @top 
+
+
+    # Bulb.each do |bulb|
+    #   bulb.switched_on = true
+    # end
+
+
+
 end
